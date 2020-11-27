@@ -1,0 +1,16 @@
+services:
+    notify.producer.pnotify:
+        parent: 'notify.producer.abstract'
+        class: Notify\Pnotify\Producer\PnotifyProducer
+        tags:
+            - { name: 'notify.producer', alias: 'pnotify' }
+
+    notify.renderer.pnotify:
+        class: Notify\Pnotify\Renderer\PnotifyRenderer
+        arguments:
+            - '@notify.config'
+        tags:
+            - { name: 'notify.renderer', alias: 'pnotify' }
+
+    Notify\Pnotify\Producer\PnotifyProducer: '@notify.producer.pnotify'
+    Notify\Pnotify\Renderer\PnotifyRenderer: '@notify.renderer.pnotify'
